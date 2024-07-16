@@ -1703,10 +1703,10 @@ class BulkToMapAnnotationContext(_QueryContext):
                 if gns in self.pkmap:
                     raise Exception('Duplicate namespace in keys: %s' % gns)
 
+                log.debug('Loaded ns:%s primary-keys:%s', gns, keys)
                 self.pkmap[gns] = keys
                 self.mapannotations.add_from_namespace_query(
                     self.client.getSession(), gns, keys)
-                log.debug('Loaded ns:%s primary-keys:%s', gns, keys)
 
     def _get_ns_primary_keys(self, ns):
         return self.pkmap.get(ns, None)
