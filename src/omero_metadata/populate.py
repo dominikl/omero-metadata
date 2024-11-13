@@ -403,7 +403,9 @@ class ValueResolver(object):
         column_class = column.__class__
         column_as_lower = column.name.lower()
         if ImageColumn is column_class:
-            if len(self.wrapper.images_by_id) == 1:
+            if isinstance(self.wrapper, ImageWrapper):
+                return self.wrapper.target_object.id.val
+            elif len(self.wrapper.images_by_id) == 1:
                 images_by_id = list(self.wrapper.images_by_id.values())[0]
             else:
                 for column, column_value in row:
